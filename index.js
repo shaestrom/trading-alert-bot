@@ -2,8 +2,8 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-const TELEGRAM_TOKEN = '8610390443:AAGc7pHuVn2wYNv7IHI7Gp2-wsA8jT7PIV8';
-const CHAT_ID = '6143270512';
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
+const CHAT_ID = process.env.CHAT_ID;
 
 app.post('/alert', async (req, res) => {
   const message = req.body.message || 'Trade alert received';
@@ -21,4 +21,5 @@ app.post('/alert', async (req, res) => {
   res.json({ ok: true });
 });
 
-app.listen(3000, () => console.log('Bot server running'));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log('Bot server running'));
